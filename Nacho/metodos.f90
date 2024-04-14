@@ -37,7 +37,7 @@ subroutine biseccion(f,aext,bext,tol_x,tol_y,p,fp,ite,max_ite,error_r_x,error_a_
     if(fa*fb > 0) then
         exito = .false.
     else
-        open(unit=1,file="datos.dat")
+        open(unit=1,file="datos_biseccion.dat")
         do ite=1,MAX_ITE
             p = a + (b-a)/2.
             fp= f(p)
@@ -212,6 +212,8 @@ REAL(KIND=wpr),intent(out)                       ::error_r_x
 REAL(KIND=wpr),intent(out)                       ::error_a_y
 LOGICAL, intent(out)                             ::exito
 
+open(unit = 4,file = "datos_newton.dat")
+
 p= pext
 fp = f(p)
 dfp = df(p)
@@ -225,12 +227,14 @@ DO ite=1,max_ite
     error_a_y  = ABS(fp)
     error_r_x  = ABS( p - (p - fp/dfp) ) / ABS( p)
     write(*,66) ite, p, fp, error_a_y, error_r_x
+    write(4,66) ite, p, fp, error_a_y, error_r_x
 66  FORMAT(I4, 4(2x,E18.12))
     IF ( error_a_y < tol_y  .AND. error_r_x < tol_x) exit
     if ( error_r_x < tol_x  .and. error_a_y < tol_y) exit
 
 END DO
 
+close(4)
 IF(ite > max_ite) THEN 
     exito = .false.
 ELSE 
