@@ -1,0 +1,3 @@
+gfortran problema3g2.f90 mod_metodos.f90 funciones.f90 precision.f90 -o problema3g2.out
+
+gfortran precision.f90 funciones.f90 mod_metodos.f90 problema3g2.f90 -o problema3g2.out
