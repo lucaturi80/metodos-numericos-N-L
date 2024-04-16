@@ -1,0 +1,20 @@
+module funciones
+use isoprecisiones
+use ls
+contains
+
+REAL (KIND= rd) FUNCTION p(total,xv,x)
+REAL (KIND = rd), intent(in) :: x
+INTEGER(KIND=il),intent(in)			::total
+REAL, DIMENSION(total,2), intent(in)	 	::xv
+
+p = 0
+do n= 1, total
+p = p + l(n,total, xv, x)* xv(i,2)
+end do
+
+end function p
+
+
+
+end module funciones
