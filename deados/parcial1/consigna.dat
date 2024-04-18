@@ -25,7 +25,8 @@ Los datos de entrada deben inicializarse en la parte de definición de variables
 
 ⚫ el número máximo de iteraciones mazite
 
-El algoritmo debe detenerse cuando el error relativo en z sea menor que tol, y el error absoluto en y sea menor a fol, o cuando el número de iteraciones alcance el valor mazite.
+El algoritmo debe detenerse cuando el error relativo en z sea menor que tol, y el error absoluto en 
+y sea menor a fol, o cuando el número de iteraciones alcance el valor mazite.
 
 El programa debe escribir en pantalla los siguientes valores finales:
 
@@ -39,7 +40,8 @@ el error relativo en z final (aproximado)
 
 y el error abstoluto en y final (aproximado)
 
-Si no converge en mazite iteraciones debe parar y dar una señal de aviso. Además la rutina debe grabar en un archivo, para cada iteración, los siguientes valores:
+Si no converge en mazite iteraciones debe parar y dar una señal de aviso. Además la rutina debe
+ grabar en un archivo, para cada iteración, los siguientes valores:
 
 el número de la iteración n,
 
@@ -71,4 +73,4 @@ S01.3 y 81 1.4 para el método de la secante.
 
 En todos los casos se deber usar tol, 10-7, tol, 10-8 y mazite 100. Llame los archivos de datos generados p1_biseccion.dat, p1_secante. dat y p1_newton. dat, los cuales deben ser entregados.
 
-) Grafique, utilizando Gnuplot, y guarde en un archivo PDF llamado p1d. pdf, el error relativo en z, En en función del número de iteración n, para los tres métodos, con escala lineal en z y logarítmica en y. Para ello realice un script llamado p1d.gp. Ambos archivos deben ser entregados.
+d) Grafique, utilizando Gnuplot, y guarde en un archivo PDF llamado p1d. pdf, el error relativo en z, En en función del número de iteración n, para los tres métodos, con escala lineal en z y logarítmica en y. Para ello realice un script llamado p1d.gp. Ambos archivos deben ser entregados.
