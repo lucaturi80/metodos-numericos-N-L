@@ -34,7 +34,7 @@ integer(kind=ed),intent(out)  :: Nite
 integer(kind=ed),intent(in)   :: unidad
 real(kind=dp)   :: f
 
-!defino variables auxiliares
+!defino variables auxiliares*********************************************************
 real(kind=dp) :: fa, fb, p, fp, errorx, errory
 real(kind=dp) :: ai, bi
 
@@ -45,13 +45,11 @@ real(kind=dp) :: ai, bi
 ai = a
 bi = b
 
-!programa
+!programa******************************************************************
 
 fa = f(a)            !evaluo la fucion en a y en b 
 fb = f(b)            ! y seteo las iteraciones en 0
 Nite = 0_ed          !
-
-!print*, fa, fb
 
 ! si la fa y fb tienen el mismo signo, digo que ingrese denuevo
 if(fa * fb > 0.0_dp )then
@@ -59,7 +57,7 @@ if(fa * fb > 0.0_dp )then
   stop
 end if
 
-write(unidad,*) "n° ite","     ","xn","         ","error x","             ","error y"
+write(unidad,*) "n° ite","     ","xn","         ","f en xn","         ","error rel x","             ","error abs y"
 
 !hago el primer paso del metodo
 p = a + (b - a) / 2.0_dp    !le resto a el extremo inferior del intervalo la mitad de la longitud del inervalo
@@ -83,13 +81,13 @@ do
   Nite = Nite + 1_ed
   
   !calculo el error relativo en x y el absoluto en y
-  errorx = abs(bi-ai) / 2.0_dp
+  errorx = abs(bi-ai) / abs(ai + bi)
   errory = abs(fp)
   
   if((errorx < tol_x).and.(errory < tol_y)) exit
   if(Nite > max_ite) exit
   
-  write(unidad,66) Nite,p,errorx,errory
+  write(unidad,66) Nite,p,fp,errorx,errory   !p es la xn, fp es la funcion evaluada en xn
  
   end do
 
@@ -100,11 +98,13 @@ if(Nite > max_ite)then
 
 raiz = p
 
-write(unidad,*)"ite final","     ","raiz aprox","         ","error rel x","             ","error abs y"
-write(unidad,66) Nite,p,errorx,errory
+write(unidad,*)"ite final","     ","xn","         ","f en xn","         ","error rel x","             ","error abs y"
+write(unidad,66) Nite,p,fp,errorx,errory   !p es la xn, fp es la funcion evaluada en xn
 
-write(*,*)"ite final","     ","raiz aprox","         ","error rel x","             ","error abs y"
-write(*,*) Nite,p,errorx,errory
+write(*,*)"ite final","     ","xn","         ","f en xn","         ","error rel x","             ","error abs y"
+write(*,66) Nite,p,fp,errorx,errory   !p es la xn, fp es la funcion evaluada en xn
+
+66 FORMAT(I4, 6(x,E18.9))
 
 end subroutine biseccion
 
@@ -153,16 +153,7 @@ f1 = f(b)      ! inicializo las variables del programa
 f0 = f(a)      !
 Nite = 0_ed    !
 
-!print*, p1,p0,f1,f0
-
-
-! si la fa y fb tienen el mismo signo, digo que ingrese denuevo el intervalo
-if(f1 * f0 > 0.0_dp )then
-  print*, "la funcion tiene el mismo signo en a y en b, ingrese de nuevo el intervalo"
-  stop
-end if
-
-write(unidad,*) "n° ite","     ","pn","         ","error x","             ","error y"
+write(unidad,*) "n° ite","     ","xn","         ","f en xn","         ","error rel x","             ","error abs y"
 
 p2 = p1 - f1 * ((p1 - p0) / (f1 - f0))
 f2 = f(p2)
@@ -180,7 +171,7 @@ do
  p2 = p1 - f1 * ((p1 - p0) / (f1 - f0))
  f2 = f(p2)
 
- errorx = abs(p2 - p1)
+ errorx = abs(p2 - p1) / abs(p2)
  errory = abs(f2)
 
  Nite = Nite + 1_ed
@@ -188,7 +179,7 @@ do
  if((errorx < tol_x).and.(errory < tol_y)) exit
  if(Nite > max_ite) exit
 
- write(unidad,'(I4 ,4(x,E19 .12) )') Nite,p2,errorx,errory
+ write(unidad,66) Nite,p2,f2,errorx,errory   !p2 es la xn, f2 es la funcion evaluada en xn
 
 end do
 
@@ -199,11 +190,13 @@ if(Nite > max_ite)then
 
 raiz = p2
 
-write(unidad,*)"ite final","     ","raiz aprox","         ","error rel x","             ","error abs y"
-write(unidad,'(I4 ,4(x,E19 .12) )') Nite,p2,errorx,errory
+write(unidad,*)"ite final","     ","xn","         ","f en xn","         ","error rel x","             ","error abs y"
+write(unidad,66) Nite,p2,f2,errorx,errory   !p2 es la xn, f2 es la funcion evaluada en xn
 
-write(*,*)"ite final","     ","raiz aprox","         ","error rel x","             ","error abs y"
-write(*,*) Nite,p2,errorx,errory
+write(*,*)"ite final","     ","xn","         ","f en xn","         ","error rel x","             ","error abs y"
+write(*,66) Nite,p2,f2,errorx,errory   !p2 es la xn, f2 es la funcion evaluada en xn
+
+66 FORMAT(I4, 6(x,E18.9))
 
 end subroutine secante
 
@@ -250,14 +243,14 @@ ai = a
 fa = f(a)
 dfa = df(a)
 
-write(unidad,*) "n° ite","     ","pn","         ","error x","             ","error y"
+write(unidad,*) "n° ite","     ","xn","         ","f en xn","         ","error rel x","             ","error abs y"
 
 
 do
  p = ai - fa / dfa
  fp = f(p)
  
- errorx = abs(p - ai)
+ errorx = abs(p - ai) / abs(p)
  errory = abs(fp)
 
  Nite = Nite + 1_ed
@@ -265,7 +258,7 @@ do
  if((errorx < tol_x).and.(errory < tol_y)) exit
  if(Nite > max_ite) exit
 
-write(unidad,'(I4 ,4(x,E19 .12) )') Nite,p,errorx,errory
+write(unidad,66) Nite,p,fa,errorx,errory
 
 ai = p
 fa = fp
@@ -280,11 +273,13 @@ if(Nite > max_ite)then
 
 raiz = p
 
-write(unidad,*)"ite final","     ","raiz aprox","         ","error rel x","             ","error abs y"
-write(unidad,'(I4 ,4(x,E19 .12) )') Nite,p,errorx,errory
+write(unidad,*)"ite final","     ","xn (raiz)","         ","f en xn","         ","error rel x","             ","error abs y"
+write(unidad,66) Nite,p,fa,errorx,errory   !p es la xn, fa es la funcion evaluada en xn
 
-write(*,*)"ite final","     ","raiz aprox","         ","error rel x","             ","error abs y"
-write(*,*) Nite,p,errorx,errory
+write(*,*)"ite final","     ","xn (raiz)","         ","f en xn","         ","error rel x","             ","error abs y"
+write(*,66) Nite,p,fa,errorx,errory   !p es la xn, fa es la funcion evaluada en xn
+
+66 FORMAT(I4, 6(x,E18.9))
 
 end subroutine newton
 
