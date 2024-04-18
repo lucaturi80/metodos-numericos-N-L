@@ -1,4 +1,4 @@
-module modulos
+module metodos
 
 use isoprecisiones
 use funciones
@@ -24,19 +24,19 @@ subroutine biseccion(f,a,b,tol_x,tol_y,raiz,max_ite,Nite,unidad)
 !************************************************************************
 
 !defino variables de la subrutina
-real(kind=rd),intent(in)   :: a 
-real(kind=rd),intent(in)   :: b
-real(kind=rd),intent(in)   :: tol_x
-real(kind=rd),intent(in)   :: tol_y
-real(kind=rd),intent(out)  :: raiz
-real(kind=rd),intent(in)   :: max_ite
-integer(kind=id),intent(out)  :: Nite
-integer(kind=is),intent(in)   :: unidad
-real(kind=rd)   :: f
+real(kind=dp),intent(in)   :: a 
+real(kind=dp),intent(in)   :: b
+real(kind=dp),intent(in)   :: tol_x
+real(kind=dp),intent(in)   :: tol_y
+real(kind=dp),intent(out)  :: raiz
+real(kind=dp),intent(in)   :: max_ite
+integer(kind=ed),intent(out)  :: Nite
+integer(kind=ed),intent(in)   :: unidad
+real(kind=dp)   :: f
 
 !defino variables auxiliares
-real(kind=rd) :: fa, fb, p, fp, errorx, errory
-real(kind=rd) :: ai, bi
+real(kind=dp) :: fa, fb, p, fp, errorx, errory
+real(kind=dp) :: ai, bi
 
 ! ai y bi los extremos del interbalo en cada iteracion
 ! fa y fb los valores de los extremos del interbalo evaluados en f en cada iteracion
@@ -49,27 +49,27 @@ bi = b
 
 fa = f(a)            !evaluo la fucion en a y en b 
 fb = f(b)            ! y seteo las iteraciones en 0
-Nite = 0_id          !
+Nite = 0_ed          !
 
 !print*, fa, fb
 
 ! si la fa y fb tienen el mismo signo, digo que ingrese denuevo
-if(fa * fb > 0.0_rd )then
+if(fa * fb > 0.0_dp )then
   print*, "la funcion tiene el mismo signo en a y en b, ingrese de nuevo el interbalo"
   stop
 end if
 
-write(unidad,*) "n° ite","     ","f(pn)","         ","error x","             ","error y"
+write(unidad,*) "n° ite","     ","xn","         ","error x","             ","error y"
 
 !hago el primer paso del metodo
-p = a + (b - a) / 2.0_rd    !le resto a el extremo inferior del intervalo la mitad de la longitud del inervalo
+p = a + (b - a) / 2.0_dp    !le resto a el extremo inferior del intervalo la mitad de la longitud del inervalo
 fp = f(p)
 !print*, a,b
 !print*, p, fp
 
 !mira el signo y redefine los extremos de los intebalos
 do
-  if(fa * fp < 0.0_rd)then 
+  if(fa * fp < 0.0_dp)then 
      bi = p      !si fa y fp tienen signo distinto la raiz esta entre a y p
      fb = fp     !entonces cambiamos el extremo superior para que sea igual a p
   else 
@@ -78,19 +78,19 @@ do
   end if
     
   !hace otro paso del metodo y evalua la funcion el el punto para chequiar el error en y
-  p = ai + (bi - ai) / 2.0_rd
+  p = ai + (bi - ai) / 2.0_dp
   fp = f(p)
-  Nite = Nite + 1_id
+  Nite = Nite + 1_ed
   
   !calculo el error relativo en x y el absoluto en y
-  errorx = abs(bi-ai) / 2.0_rd
+  errorx = abs(bi-ai) / 2.0_dp
   errory = abs(fp)
   
   if((errorx < tol_x).and.(errory < tol_y)) exit
   if(Nite > max_ite) exit
   
-  write(unidad,'(I4 ,4(x,E19 .12) )') Nite,p,errorx,errory
-  
+  write(unidad,66) Nite,p,errorx,errory
+ 
   end do
 
 if(Nite > max_ite)then
@@ -101,7 +101,7 @@ if(Nite > max_ite)then
 raiz = p
 
 write(unidad,*)"ite final","     ","raiz aprox","         ","error rel x","             ","error abs y"
-write(unidad,'(I4 ,4(x,E19 .12) )') Nite,p,errorx,errory
+write(unidad,66) Nite,p,errorx,errory
 
 write(*,*)"ite final","     ","raiz aprox","         ","error rel x","             ","error abs y"
 write(*,*) Nite,p,errorx,errory
@@ -127,18 +127,18 @@ subroutine secante(f,a,b,tol_x,tol_y,raiz,max_ite,Nite,unidad)
 
 !defino las variables DUMY
 
-real(kind=rd),intent(in)   :: a 
-real(kind=rd),intent(in)   :: b
-real(kind=rd),intent(in)   :: tol_x
-real(kind=rd),intent(in)   :: tol_y
-real(kind=rd),intent(out)  :: raiz
-real(kind=rd),intent(in)   :: max_ite
-integer(kind=id),intent(out)  :: Nite
-integer(kind=is),intent(in)   :: unidad
-real(kind=rd)   :: f
+real(kind=dp),intent(in)   :: a 
+real(kind=dp),intent(in)   :: b
+real(kind=dp),intent(in)   :: tol_x
+real(kind=dp),intent(in)   :: tol_y
+real(kind=dp),intent(out)  :: raiz
+real(kind=dp),intent(in)   :: max_ite
+integer(kind=ed),intent(out)  :: Nite
+integer(kind=ed),intent(in)   :: unidad
+real(kind=dp)   :: f
 
 !defino las variables del programa
-real(kind=rd) :: p0, p1, f1, f0, p2, f2, errorx, errory
+real(kind=dp) :: p0, p1, f1, f0, p2, f2, errorx, errory
 
 !p1 y p0 son los valores de los extemos de los interbalos en cada iteracion
 !f1 y f0 son los extremos de los intervalos evaluados en f
@@ -151,13 +151,13 @@ p1 = b         !
 p0 = a         !
 f1 = f(b)      ! inicializo las variables del programa
 f0 = f(a)      !
-Nite = 0_id    !
+Nite = 0_ed    !
 
 !print*, p1,p0,f1,f0
 
 
 ! si la fa y fb tienen el mismo signo, digo que ingrese denuevo el intervalo
-if(f1 * f0 > 0.0_rd )then
+if(f1 * f0 > 0.0_dp )then
   print*, "la funcion tiene el mismo signo en a y en b, ingrese de nuevo el intervalo"
   stop
 end if
@@ -183,7 +183,7 @@ do
  errorx = abs(p2 - p1)
  errory = abs(f2)
 
- Nite = Nite + 1_id
+ Nite = Nite + 1_ed
 
  if((errorx < tol_x).and.(errory < tol_y)) exit
  if(Nite > max_ite) exit
@@ -227,25 +227,25 @@ subroutine newton(f,df,a,tol_x,tol_y,raiz,max_ite,Nite,unidad)
 
 !defino las variables DUMY
 
-real(kind=rd),intent(in)   :: a 
-real(kind=rd),intent(in)   :: tol_x
-real(kind=rd),intent(in)   :: tol_y
-real(kind=rd),intent(out)  :: raiz
-real(kind=rd),intent(in)   :: max_ite
-integer(kind=id),intent(out)  :: Nite
-integer(kind=is),intent(in)   :: unidad
-real(kind=rd)   :: f, df
+real(kind=dp),intent(in)   :: a 
+real(kind=dp),intent(in)   :: tol_x
+real(kind=dp),intent(in)   :: tol_y
+real(kind=dp),intent(out)  :: raiz
+real(kind=dp),intent(in)   :: max_ite
+integer(kind=ed),intent(out)  :: Nite
+integer(kind=ed),intent(in)   :: unidad
+real(kind=dp)   :: f, df
 
 !defino variables auxiliares
-real(kind=rd) :: fa, dfa, p, fp, errorx, errory
-real(kind=rd) :: ai
+real(kind=dp) :: fa, dfa, p, fp, errorx, errory
+real(kind=dp) :: ai
 
 ! ai los extremos del interbalo en cada iteracion
 ! fa y fb los valores de los extremos del interbalo evaluados en f en cada iteracion
 ! p y fp son el punto medio del intervalo y este ebaluado en f
 
 !inicializo las variables auxiliares
-Nite = 0_id
+Nite = 0_ed
 ai = a 
 fa = f(a)
 dfa = df(a)
@@ -260,7 +260,7 @@ do
  errorx = abs(p - ai)
  errory = abs(fp)
 
- Nite = Nite + 1_id
+ Nite = Nite + 1_ed
 
  if((errorx < tol_x).and.(errory < tol_y)) exit
  if(Nite > max_ite) exit
@@ -289,5 +289,5 @@ write(*,*) Nite,p,errorx,errory
 end subroutine newton
 
 
-end module modulos
+end module metodos
 

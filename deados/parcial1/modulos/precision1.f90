@@ -14,6 +14,8 @@ integer(kind=int8),parameter :: rs=real32, rd=real64, rx=real128
 
 integer(kind=int8),parameter :: dp=rd, ed=id
 
+66 format('I3, 4(x,E9)')
+
 end module isoprecisiones
 
 
