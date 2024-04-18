@@ -1,5 +1,9 @@
+grupo 6
+
 problema 1
-a) Escriba un programa en FORTRAN utilizando buenas prácticas de programación y en doble precisión que permita obtener una aproximación numérica a una raíz de cierta función f(z) implementando los métodos de bisección, secante y Newton, generando las salidas de pantalla y los archivos que se indican más adelante.
+a) Escriba un programa en FORTRAN utilizando buenas prácticas de programación y en doble precisión
+ que permita obtener una aproximación numérica a una raíz de cierta función f(z) implementando los métodos 
+ de bisección, secante y Newton, generando las salidas de pantalla y los archivos que se indican más adelante.
 
 El programa principal debe llamarse p1.f90 y usted deberá crear además tres módulos:
 
