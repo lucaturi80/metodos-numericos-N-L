@@ -16,7 +16,7 @@ real(nr),allocatable,dimension(:)   :: x0,y0
 open(newunit=nu1,file='data/datos.dat',status='old',action='read')
 open(newunit=nu2,file='data/parcial2e.dat',status='replace',action='write')
 
-write(nu2,'(A4,2A18)') '#','r (nm)','V(r) (erg)'
+write(nu2,'(2A18)') '# r (nm)','V(r) (erg)'
 
 n_ite = 0_ni
 r0 = 0.320_nr
@@ -51,7 +51,7 @@ do
  call lagrange(3,x0,y0,r0,Vr04)
  print*, Vr04
 
- write(nu2,'(I4,2F18.8)') n_ite,r0,Vr04
+ write(nu2,'(2F18.8)') r0,Vr04
 
  if(r0 >= 0.735_nr) exit
 
@@ -79,12 +79,9 @@ end do
 call lagrange(3,x0,y0,r0,Vr04)
 print*, Vr04
   
-write(nu2,'(I4,2F18.8)') n_ite,r0,Vr04
+write(nu2,'(2F18.8)') r0,Vr04
 
 deallocate(x0,y0)
 
-!ahora grafico con gnuplot
-
-call system ('gnuplot parcial2e.gp')
 
 end program parcial2e

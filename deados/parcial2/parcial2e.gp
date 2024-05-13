@@ -12,8 +12,13 @@ set xlabel "r (en nm) distancia entre los atomos"
 set ylabel "V(r) (en erg) potencial de Lennard-Jones"
 
 set key box right
-set xra [0.3:0.75]
-plot 'data/parcial2e.dat' u 2:3 t 'funcion interpolada con lagrange',V(x) t 'funcion ajustada con gnuplot'
+
+set grid
+
+set xrange [0.3:0.75]
+set yrange [-175:200]
+
+plot 'data/parcial2e.dat' with points t 'funcion interpolada con lagrange',V(x) t 'funcion ajustada con gnuplot'
 
 
 
