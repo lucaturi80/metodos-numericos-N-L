@@ -1,5 +1,5 @@
 module derivada_aprox
-use isoprec
+use variables_prec
 
 INTEGER(kind = il), PARAMETER     :: ni = il, nr = rd
 
