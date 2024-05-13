@@ -8,14 +8,14 @@ REAL(KIND=nr)               :: sigma = 0.334454_nr !la distancia a la cual el po
 
 contains
 
-REAL(KIND = nr) FUNCTION V(r)
+REAL(KIND = nr) FUNCTION fp(r)
 REAL(KIND=nr), intent(in)   ::r 
-v = 4 * prfpot * ( (sigma/r)**12 - (sigma/r)**6)
-END FUNCTION V
+fp = 4 * prfpot * ( (sigma/r)**12 - (sigma/r)**6)
+END FUNCTION fp
 
-REAL(KIND = nr) FUNCTION V(r)
+REAL(KIND = nr) FUNCTION dfp(r)
 REAL(KIND=nr), intent(in)   ::r 
-v = 4 * prfpot * ( (sigma**12)*((-12)*r**(-13)) - (sigma**6)*((-6)* r**(-7)))
-END FUNCTION V
+dfp = 4 * prfpot * ( (sigma**12)*((-12)*r**(-13)) - (sigma**6)*((-6)* r**(-7)))
+END FUNCTION dfp
 
 end module
