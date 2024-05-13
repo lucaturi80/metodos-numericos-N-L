@@ -43,3 +43,23 @@ Por lo tanto si en lugar de ver una cota del error en todo el intervalo [0.36, 0
 para cada intervalo [rk - 0.005, rk +0.005] veríamos que la cota es cada vez menor.
 
 
+(1d)
+ resultados del programa:
+   valor del potencial de lennard-jones en el punto        0.43750000
+                           interpolado usando polinomio de lagrange y los 4 puntos mas proximos a ro
+el potencial vale      -79.84041385
+y el error relativo seria:        0.00634296
+
+valor del potencial de lennard-jones en el punto        0.43750000
+                           interpolado usando polinomio de lagrange y los 8 puntos mas proximos a ro
+el potencial vale      -79.72136313
+y el error relativo seria:        0.00782461
+
+valor del potencial de lennard-jones en el punto        0.43750000
+                             interpolado usando polinomio de lagrange y todos los puntos del archivo
+el potencial vale      -78.41551416
+y el error relativo seria:        0.02407660
+
+una observacion es que la interpocacion que hicimos usando menos datos fueron mas exactas que en las que usamos mas datos, esto se podria deber a que el polinomio de lagrange, al intentar que la funcion sea exacta en mas puntos las iterpolaciones que hace son peores, capaz convendria hacer un ajuste por cuadrados minimos o algun ajuste, que la interpolacion es mejor mientras mas puntos conoscas, igual los errores fueron del orden de 10**(-2)
+
+
