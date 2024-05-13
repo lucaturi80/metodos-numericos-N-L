@@ -1,4 +1,4 @@
-module variables_prec
+module global_prec
 
 use isoprec
 
