@@ -1,0 +1,41 @@
+(1a)  
+  Se ve en los datos que el valor minimo del potencial esta en un punto cerca de 3.55nm.
+   Parece que cuando los atomos se acercan a mas de 3.4nm (aprox) empieza a actuar la fuerza de 
+  repulcion que aumenta en energia muy rapidamente conforme los atomos se acercan mas, en el punto cerca de 3.55nm 
+  la fuerza de atraccion alcansa su valor maximo y mientras se van alejando los atomos esta fuerza va
+  disminuyendo de manera lenta hasta que en algun punto mas alla de los que mustran las mediciones
+  la fuerza de atranccion es 0.
+   Esta fuerza haria que en el dimero los dos atomos oscilaran alrededor del punto en el que cambia 
+  de ser fuerza de atraccion a fuerza de repulcion.
+
+
+(1b)
+  Los resultados obtenidos del gnuplot son
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+prfpot          = 125.738          +/- 0.1938       (0.1541%)
+sigma           = 0.334454         +/- 2.767e-05    (0.008272%)
+
+(1c)
+  La derivada 3ra de V(t) es 
+F(x) = 4 * epsilon * ( (sigma**12)*(-12)*(-13)*(-14)* x**(-15) - (sigma**6)*((-6)*(-7)*(-8)* x**(-9)))
+y como podemos apreciar con gnuplot usando este script:
+
+prfpot = 125.738
+sigma = 0.334454
+F(x) = 4 * prfpot * ( (sigma**12)*(-12)*(-13)*(-14)* x**(-15) - (sigma**6)*((-6)*(-7)*(-8)* x**(-9)))
+set xra [0.36:0.75]
+plot F(x)
+pause -1
+
+  la funcion es creciente, en el intervalo. y su modulo alcanza su maximo en 0.36. Por lo tanto una cota de |v'''(r)| es |v'''(0.36)|
+entonces el error que, dado por E = |h**2 * f'''(xi) / 6| en los puntos donde fue calculada con la formula de 3 puntos centrada,
+tiene una cota de h**2 * |f'''(0.36)| / 6 = 0.005**2 * 7404751.7 / 6  = 30.85. 
+  Por otro lado, para los puntos en los extremos, que fueron calculados con la de 3 puntos en los extremos, tiene un error 
+dado por E = |h**2 * f'''(xi) / 3| entonces su cota es h**2 * |f'''(0.36)| / 3 = 0.005**2 * 7404751.7 / 3  = 61.7.
+  Por lo tanto el error está acotado por 30.85 en los puntos del medio y por 61.7 en los extremos. Y como podemos ver 
+en parcial2c_error.pdf esto se cumple.
+  Sin embargo no temos que es una cota que nos queda muy holgada ya que el error decrece rapidamente. Esto ocurre porque V''' converge a 0 rapidamente.
+Por lo tanto si en lugar de ver una cota del error en todo el intervalo [0.36, 0.75]  nos concentraramos en una cota del error 
+para cada intervalo [rk - 0.005, rk +0.005] veríamos que la cota es cada vez menor.

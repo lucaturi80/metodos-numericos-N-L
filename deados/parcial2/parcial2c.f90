@@ -27,9 +27,9 @@ rmax = 0.75_nr!nm
 rvar = rmin
 DO 
     IF (rvar == rmin) THEN
-        dfx = dF2I(0.005_nr, fp(rvar), fp(rvar+0.005_nr))
+        dfx = dF3I(0.005_nr, fp(rvar), fp(rvar+0.005_nr), fp(rvar+0.010_nr))
     ELSE IF (rvar == rmax) THEN
-        dfx = dF2D(0.005_nr, fp(rvar-0.005_nr), fp(rvar))
+        dfx = dF3D(0.005_nr, fp(rvar-0.010_nr), fp(rvar-0.005_nr), fp(rvar))
     ELSE 
         dfx = dF3C(0.005_nr, fp(rvar-0.005), fp(rvar), fp(rvar+0.005))
     END IF
