@@ -1,5 +1,6 @@
 program 1c
 
+use isoprec
 use derivada_aprox
 
 !----------------------------------
@@ -7,7 +8,7 @@ use derivada_aprox
 !----------------------------------
 implicit none
 
-REAL(KIND=nr) 
+
 
 
 !----------------------------------
