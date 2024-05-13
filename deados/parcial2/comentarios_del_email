@@ -7,3 +7,12 @@
   la fuerza de atranccion es 0.
    Esta fuerza haria que en el dimero los dos atomos oscilaran alrededor del punto en el que cambia 
   de ser fuerza de atraccion a fuerza de repulcion.
+
+
+1b)
+Los resultados obtenidos del gnuplot son
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+prfpot          = 125.738          +/- 0.1938       (0.1541%)
+sigma           = 0.334454         +/- 2.767e-05    (0.008272%)

@@ -3,8 +3,8 @@ module funciones
 use global_prec
 
 implicit none
-REAL(KIND=nr)               ::prfpot = !profundidad del potencial (ajustando la funcion a los datos)
-REAL(KIND=nr)               ::sigma = !la distancia a la cual el potencial entre las dos partıculas es cero.(ajustando la funcion a los datos)
+REAL(KIND=nr)               :: prfpot= 125.7380_nr !profundidad del potencial (ajustando la funcion a los datos)
+REAL(KIND=nr)               :: sigma = 0.334454_nr !la distancia a la cual el potencial entre las dos partıculas es cero.(ajustando la funcion a los datos)
 
 contains
 
