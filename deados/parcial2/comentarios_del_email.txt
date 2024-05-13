@@ -29,36 +29,34 @@ set xra [0.36:0.75]
 plot F(x)
 pause -1
 
-  la funcion es creciente, en el intervalo. y su modulo alcanza su maximo en 0.36. Por lo tanto una cota de |v'''(r)| es |v'''(0.36)| = 7404751.7.
+  la funcion es creciente, en el intervalo. y su modulo alcanza su maximo en 0.37. Por lo tanto una cota de |v'''(r)| es |v'''(0.37)| = 6204265.26.
 Por otro lado como estamos trabajando con una precision dada por rd q es precision doble, por lo tanto una cota holgada del error de
 redondeo sería 0.0005                                                                                                  ####duda:como encontramos la cota de redondeo
-entonces una cota del error en los puntos donde fue calculada con la formula de 3 puntos centrada es 0.0005/0.005 +0.005**2 * 7404751.7 / 6 =
-=0.1 + 0.005**2 * 7404751.7 / 6  = 30.85.  notemos que podemos despreciar el error de redondeo.
-  Por otro lado, para los puntos en los extremos, que fueron calculados con la de 3 puntos en los extremos, tiene un error 
-dado por E = |h**2 * f'''(xi) / 3| entonces su cota es h**2 * |f'''(0.36)| / 3 = 0.005**2 * 7404751.7 / 3  = 61.7.
-  Por lo tanto el error está acotado por 30.85 en los puntos del medio y por 61.7 en los extremos. Y como podemos ver 
-en parcial2c_error.pdf esto se cumple.
-  Sin embargo no temos que es una cota que nos queda muy holgada ya que el error decrece rapidamente. Esto ocurre porque V''' converge a 0 rapidamente.
-Por lo tanto si en lugar de ver una cota del error en todo el intervalo [0.36, 0.75]  nos concentraramos en una cota del error 
-para cada intervalo [rk - 0.005, rk +0.005] veríamos que la cota es cada vez menor.
+entonces una cota del error, sabiendo que fue calculada con la formula de 3 puntos centrada, es 0.0005/0.005 +0.005**2 * 7404751.7 / 6 =
+=0.1 + 0.005**2 * 6204265.26 / 6  = 25.85.  notemos que podemos despreciar el error de redondeo.
+  Por lo tanto el error está acotado por 25.85 en los puntos del medio. Y como podemos ver en parcial2c_error.pdf esto se cumple.
+  Sin embargo tenemos que es una cota que nos queda muy holgada ya que el error decrece rapidamente. Esto ocurre puesto V''' converge a 0 rapidamente.
+Por lo tanto si en lugar de ver una cota del error en todo el intervalo [0.37, 0.74]  nos concentraramos en una cota del error 
+para cada intervalo [rk - 0.005, rk +0.005] veríamos que la cota es cada vez menor. Y si la cota es cada vez menor entonces el error tambien.
 
 
 (1d)
  resultados del programa:
    valor del potencial de lennard-jones en el punto        0.43750000
                            interpolado usando polinomio de lagrange y los 4 puntos mas proximos a ro
-el potencial vale      -79.84041385
-y el error relativo seria:        0.00634296
-
+el potencial vale      -79.76378153
+y el error relativo seria:        0.00729669
+    
 valor del potencial de lennard-jones en el punto        0.43750000
                            interpolado usando polinomio de lagrange y los 8 puntos mas proximos a ro
-el potencial vale      -79.72136313
-y el error relativo seria:        0.00782461
+el potencial vale      -79.68676279
+y el error relativo seria:        0.00825523
 
 valor del potencial de lennard-jones en el punto        0.43750000
                              interpolado usando polinomio de lagrange y todos los puntos del archivo
 el potencial vale      -78.41551416
 y el error relativo seria:        0.02407660
+
 
 una observacion es que la interpocacion que hicimos usando menos datos fueron mas exactas que en las que usamos mas datos, esto se podria deber a que el polinomio de lagrange, al intentar que la funcion sea exacta en mas puntos las iterpolaciones que hace son peores, capaz convendria hacer un ajuste por cuadrados minimos o algun ajuste, que la interpolacion es mejor mientras mas puntos conoscas, igual los errores fueron del orden de 10**(-2)
 

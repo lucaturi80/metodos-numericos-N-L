@@ -29,7 +29,7 @@ end do
 
 rewind(nu)
 
-do i=1,n-3  !leo y tiro la cantidad de datos suficiente hasta que me queden justo los 2 puntos anteriores a r0
+do i=1,n-2  !leo y tiro la cantidad de datos suficiente hasta que me queden justo los 2 puntos anteriores a r0
  read(nu,*) r
 end do
 
@@ -37,7 +37,7 @@ allocate(x0(0:3),y0(0:3))
 
 do i=0,3                    ! esto lee los 2 datos antes de r0 y los 2 de despues y los guarda
     read(nu,*) x0(i),y0(i)  ! en 2 vectores para darle al modulo de interpolacion de lagrange
-    write(*,*) x0(i)
+!    write(*,*) x0(i)        !corroboro en la consola q las 4 x son las dos anteriores y dos posteriores a r0
 end do
 
 call lagrange(3,x0,y0,r0,Vr04)
@@ -58,13 +58,13 @@ close(nu)
 open(newunit=nu,file='data/datos.dat',status='old',action='read')
 allocate(x0(0:7),y0(0:7))
 
-do i=1,n-5
+do i=1,n-4
     read(nu,*) r !leo y tiro la cantidad de datos suficiente hasta que me queden justo los 4 puntos anteriores a r0
 end do
 
 do i=0,7                    ! esto lee los 4 datos antes de r0 y los 4 de despues y los guarda en un
     read(nu,*) x0(i),y0(i)  ! en 2 vectores para darle al modulo de interpolacion de lagrange
-    write(*,*) x0(i)
+!    write(*,*) x0(i)        !corroboro en la consola q las 4 x son las dos anteriores y dos posteriores a r0
 end do
 
 call lagrange(7,x0,y0,r0,Vr08)
