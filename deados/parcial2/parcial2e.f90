@@ -21,9 +21,9 @@ write(nu2,'(A4,2A18)') '#','r (nm)','V(r) (erg)'
 n_ite = 0_ni
 r0 = 0.320_nr
 
-do
+allocate(x0(0:3),y0(0:3))
 
- if(r0 >= 0.740_nr) exit
+do
 
  n_ite = n_ite + 1_ni
  n = 0_ni
@@ -42,7 +42,7 @@ do
   read(nu1,*) r
  end do
 
- allocate(x0(0:3),y0(0:3))
+
 
  do i=0,3                    ! esto lee los 2 datos antes de r0 y los 2 de despues y los guarda en un
     read(nu1,*) x0(i),y0(i)  ! en 2 vectores para darle al modulo de interpolacion de lagrange
@@ -51,14 +51,40 @@ do
  call lagrange(3,x0,y0,r0,Vr04)
  print*, Vr04
 
+ write(nu2,'(I4,2F18.8)') n_ite,r0,Vr04
+
+ if(r0 >= 0.735_nr) exit
+
  r0 = r0 + 0.005_nr
 
- write(nu2,'(I4,2F18.8)') n_ite,r,Vr04
- 
-
  rewind(nu1)
- deallocate(x0,y0)
+ 
 end do
 
+!ahora evaluo la ultima de forma munual ya que no tiene datos mayores
+
+n_ite = n_ite + 1_ni
+rewind(nu1)
+r0 = r0 + 0.005_nr
+
+do i=1,n-3
+    read(nu1,*) r
+end do
+  
+  
+do i=0,3                    ! esto lee los 2 datos antes de r0 y los 2 de despues y los guarda en un
+      read(nu1,*) x0(i),y0(i)  ! en 2 vectores para darle al modulo de interpolacion de lagrange
+end do
+  
+call lagrange(3,x0,y0,r0,Vr04)
+print*, Vr04
+  
+write(nu2,'(I4,2F18.8)') n_ite,r0,Vr04
+
+deallocate(x0,y0)
+
+!ahora grafico con gnuplot
+
+call system ('gnuplot parcial2e.gp')
 
 end program parcial2e
