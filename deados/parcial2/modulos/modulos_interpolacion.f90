@@ -23,7 +23,7 @@ implicit none
 ! Y = valor del polinomio de lagrange en el x
 !*********************************************************************************************
 
-integer(kind=id),parameter :: ed=id, dp=rd
+integer(kind=id),parameter :: ed=il, dp=rd
 
 !defino variables
 
@@ -70,7 +70,7 @@ implicit none
 ! Y = valor del polinomio de newton en el x
 !*********************************************************************************************
 
-integer(kind=id),parameter :: ed=id, dp=rd
+integer(kind=id),parameter :: ed=il, dp=rd
 
 !defino variables
 
