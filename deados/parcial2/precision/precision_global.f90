@@ -1,6 +1,6 @@
 module global_prec
 
-use isoprec
+use isoprecisiones
 
 INTEGER(KIND=il),PARAMETER        ::ni = il, nr = rd
 

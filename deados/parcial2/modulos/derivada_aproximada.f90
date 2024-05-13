@@ -1,5 +1,5 @@
 module derivada_aprox
-use variables_prec
+use global_prec
 
 INTEGER(kind = il), PARAMETER     :: ni = il, nr = rd
 
