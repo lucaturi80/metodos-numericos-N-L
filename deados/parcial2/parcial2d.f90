@@ -54,6 +54,8 @@ deallocate(x0,y0)
 close(nu)
 
 !usando 4 puntos a derecha y 4 a izquierda
+!*******************************************************************************************************************************
+
 
 open(newunit=nu,file='data/datos.dat',status='old',action='read')
 allocate(x0(0:7),y0(0:7))
@@ -81,6 +83,8 @@ deallocate(x0,y0)
 close(nu)
 
 !ahora usando todos los datos del archivo
+!*******************************************************************************************************************************
+
 open(newunit=nu,file='data/datos.dat',status='old',action='read')
 
 n = 0_ni
