@@ -21,10 +21,10 @@ open(newunit=nu,file='data/datos.dat',status='old',action='read')
 n = 0_ni
 
 do
- read(nu,*,iostat=e)r     ! esto nos dice ne que pocicion del archivo esta el primer valor mayor que r0
- if(r > r0) exit 
+ read(nu,*,iostat=e)r     ! esto nos dice e que pocicion del archivo esta el primer valor mayor que r0
+ if(r > r0) exit          ! y lo guarda en la variable n
  n = n + 1_ni
- if(e == -1) print*, 'el valor r0 no se puede interpolar con los datos del archivo'
+ if(e == -1) print*, 'el valor r0 no se puede interpolar con los datos del archivo'  ! si iostat es <0 quiere decir que se alcanzo el final del archivo
 end do
 
 rewind(nu)
@@ -33,7 +33,7 @@ do i=1,n-2  !leo y tiro la cantidad de datos suficiente hasta que me queden just
  read(nu,*) r
 end do
 
-allocate(x0(0:3),y0(0:3))
+allocate(x0(0:3),y0(0:3))   ! asigno los grados de los vectores en base a la cantidad de datos que quiero usar
 
 do i=0,3                    ! esto lee los 2 datos antes de r0 y los 2 de despues y los guarda
     read(nu,*) x0(i),y0(i)  ! en 2 vectores para darle al modulo de interpolacion de lagrange
@@ -50,15 +50,13 @@ write(*,'(A17,F18.8)') "el potencial vale:",Vr04
 write(*,'(A26,F18.8)') "y el error relativo seria:",Er
 print*
 
-deallocate(x0,y0)
-close(nu)
+deallocate(x0,y0)  ! desasigno el grado a los vectores para poder usarlos en la proxima parte
+rewind(nu)
 
 !usando 4 puntos a derecha y 4 a izquierda
 !*******************************************************************************************************************************
 
-
-open(newunit=nu,file='data/datos.dat',status='old',action='read')
-allocate(x0(0:7),y0(0:7))
+allocate(x0(0:7),y0(0:7))  ! asigno grado a los vectores para usar 8 puntos
 
 do i=1,n-4
     read(nu,*) r !leo y tiro la cantidad de datos suficiente hasta que me queden justo los 4 puntos anteriores a r0
@@ -80,21 +78,19 @@ write(*,'(A26,F18.8)') "y el error relativo seria:",Er
 print*
 
 deallocate(x0,y0)
-close(nu)
+rewind(nu)
 
 !ahora usando todos los datos del archivo
 !*******************************************************************************************************************************
 
-open(newunit=nu,file='data/datos.dat',status='old',action='read')
-
 n = 0_ni
 do
- read(nu,*,iostat=e)
+ read(nu,*,iostat=e)  ! leo la cantidad de datos que tiene el archivo para asignar memoria a los vectores
  if(e /= 0) exit
  n = n + 1_ni
 end do 
 
-allocate(x0(0:n-1),y0(0:n-1))
+allocate(x0(0:n-1),y0(0:n-1))  ! les asigno espacion en base al numero de datos
 rewind(nu)
 
 do i=1,n                           ! esto lee todos los datos del archivo y los guarda en

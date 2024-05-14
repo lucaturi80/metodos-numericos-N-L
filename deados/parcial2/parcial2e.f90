@@ -23,46 +23,46 @@ r0 = 0.320_nr
 
 allocate(x0(0:3),y0(0:3))
 
-do
-
- n_ite = n_ite + 1_ni
- n = 0_ni
+do                       ! en este do voy a estar evaluando en cada r de los que dice el enunciado el polinomio de lagrange
+                         ! de orden 3 usando 2 datos menores que r0 y 2 mayores, es lo que hacia en el punto d, pero aplicado a 
+  n_ite = n_ite + 1_ni   ! cada r en este intervalo
+  n = 0_ni               !
   
 
- do
-  read(nu1,*,iostat=e)r     ! esto nos dice ne que pocicion del archivo esta el primer valor mayor que r0
-  if(r >= r0) exit 
-  n = n + 1_ni
-  if(e /= 0) exit
- end do
+  do
+     read(nu1,*,iostat=e)r     ! esto nos dice en que pocision del archivo esta el primer valor mayor que r0
+     if(r >= r0) exit          ! y lo guarda en la variable n
+     n = n + 1_ni
+     if(e /= 0) exit     ! si iostat es /=0 quiere decir que fallo la lectura de datos o se termino el archivo
+  end do
 
- rewind(nu1)
+  rewind(nu1)           ! vuelvo al inicio del archivo de datos
 
- do i=1,n-3
-  read(nu1,*) r
- end do
+  do i=1,n-3          ! esto mueve el archivo asta que esta en la pocision que queremos para que lea 
+     read(nu1,*) r    ! los 2 datos de antes de r0 y los 2 de despues
+  end do
 
 
 
- do i=0,3                    ! esto lee los 2 datos antes de r0 y los 2 de despues y los guarda en un
-    read(nu1,*) x0(i),y0(i)  ! en 2 vectores para darle al modulo de interpolacion de lagrange
- end do
+  do i=0,3                    ! esto lee los 2 datos antes de r0 y los 2 de despues y los guarda en un
+     read(nu1,*) x0(i),y0(i)  ! en 2 vectores para darle al modulo de interpolacion de lagrange
+  end do
 
- call lagrange(3,x0,y0,r0,Vr04)
- print*, Vr04
+  call lagrange(3,x0,y0,r0,Vr04)  ! evaluamos en lagrange de orden 3 los 4 datos
+  !print*, Vr04
 
- write(nu2,'(2F18.8)') r0,Vr04
+  write(nu2,'(2F18.8)') r0,Vr04  ! escribo en el archivo de salida los nuevos datos
 
- if(r0 >= 0.735_nr) exit
+  if(r0 >= 0.735_nr) exit   ! condicion de salida, si r0 > 0.735 se terminaron los datos que podemos evaluar de esta manera 
+                            ! ya que el ultimo dato no tiene datos mas adelante
+  r0 = r0 + 0.005_nr  ! adelanto r0 en 1 paso
 
- r0 = r0 + 0.005_nr
-
- rewind(nu1)
+  rewind(nu1)
  
 end do
 
-!ahora evaluo la ultima de forma munual ya que no tiene datos mayores
-
+!ahora evaluo la ultima de forma munual ya que no tiene datos mayores, es como una iteracion
+!*************************************************************************
 n_ite = n_ite + 1_ni
 rewind(nu1)
 r0 = r0 + 0.005_nr
@@ -72,16 +72,19 @@ do i=1,n-3
 end do
   
   
-do i=0,3                    ! esto lee los 2 datos antes de r0 y los 2 de despues y los guarda en un
-      read(nu1,*) x0(i),y0(i)  ! en 2 vectores para darle al modulo de interpolacion de lagrange
+do i=0,3                    
+      read(nu1,*) x0(i),y0(i) 
 end do
   
 call lagrange(3,x0,y0,r0,Vr04)
-print*, Vr04
+!print*, Vr04
   
 write(nu2,'(2F18.8)') r0,Vr04
 
 deallocate(x0,y0)
+!******************************************************************************************
 
+! en el archivo para correr el programa esta incluido la llamada al script de gnuplot que grafica los resultados junto con 
+! la funcion ajustada con gnplot
 
 end program parcial2e
