@@ -20,25 +20,20 @@ sigma           = 0.334454         +/- 2.767e-05    (0.008272%)
 (1c)
   La derivada 3ra de V(t) es 
 F(x) = 4 * epsilon * ( (sigma**12)*(-12)*(-13)*(-14)* x**(-15) - (sigma**6)*((-6)*(-7)*(-8)* x**(-9)))
-y como podemos apreciar con gnuplot usando este script:
-
-prfpot = 125.738
-sigma = 0.334454
-F(x) = 4 * prfpot * ( (sigma**12)*(-12)*(-13)*(-14)* x**(-15) - (sigma**6)*((-6)*(-7)*(-8)* x**(-9)))
-set xra [0.36:0.75]
-plot F(x)
-pause -1
-
-  la funcion es creciente, en el intervalo. y su modulo alcanza su maximo en 0.37. Por lo tanto una cota de |v'''(r)| es |v'''(0.37)| = 6204265.26.
-Por otro lado como estamos trabajando con una precision dada por rd q es precision doble, por lo tanto una cota holgada del error de
-redondeo sería 0.0005                                                                                                  ####duda:como encontramos la cota de redondeo
-entonces una cota del error, sabiendo que fue calculada con la formula de 3 puntos centrada, es 0.0005/0.005 +0.005**2 * 7404751.7 / 6 =
-=0.1 + 0.005**2 * 6204265.26 / 6  = 25.85.  notemos que podemos despreciar el error de redondeo.
-  Por lo tanto el error está acotado por 25.85 en los puntos del medio. Y como podemos ver en parcial2c_error.pdf esto se cumple.
-  Sin embargo tenemos que es una cota que nos queda muy holgada ya que el error decrece rapidamente. Esto ocurre puesto V''' converge a 0 rapidamente.
-Por lo tanto si en lugar de ver una cota del error en todo el intervalo [0.37, 0.74]  nos concentraramos en una cota del error 
-para cada intervalo [rk - 0.005, rk +0.005] veríamos que la cota es cada vez menor. Y si la cota es cada vez menor entonces el error tambien.
-
+y como podemos apreciar en parcial2c_drvda3ra.pdf generado por parcial2c_drvda3ra.gp
+el modulo de la funcion alcanza su maximo al inicio del intervalo. Por lo tanto una cota de |v'''(r)| es |v'''(0.37)| = 6204265.26.
+Por otro lado, con parcial2c_cotardndeo.f90 nos damos cuenta que la cota del error de redondeo es 10**(-15)
+entonces una cota del error, sabiendo que fue calculada con la formula de 3 puntos centrada, es 10**(-15) / 0.005 + 0.005**2 * 7404751.7 / 6 
+Podemos tomar el termino del error de redondeo como despreciable y seguimos
+=0.005**2 * 6204265.26 / 6  = 25.85.
+  Por lo tanto el error está acotado por 25.85 en los puntos del intervalo. Y como podemos ver en parcial2c_error.pdf esto se cumple.
+Sin embargo tenemos que es una cota que nos queda muy holgada ya que el error decrece rapidamente. Esto ocurre puesto V''' se acerca a 0 
+rapidamente. Por lo tanto si en lugar de ver una cota del error en todo el intervalo [0.37, 0.74]  nos concentraramos en 
+cada intervalo [rk - h, rk + h] veríamos que la cota disminuye a medida que rk llega a 0.75. 
+La cota de V''' es ella misma. Por lo tanto en esos intervalos 
+el error está dado por v'''(rk-h) * h**2 / 6.  Es interesante entonces ver en un mismo grafico el error
+y la derivada 3ra en x-h multiplicada por h**2 / 6. Este es el gráfico parcial2c_erroryf3h26.pdf generado por parcial2c_erroryf3.gp
+Como podemos ver son practicamente iguales. lo que es sorprendente.
 
 (1d)
  resultados del programa:
