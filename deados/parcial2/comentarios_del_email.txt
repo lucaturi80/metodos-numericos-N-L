@@ -35,10 +35,10 @@ Como podemos ver los puntos aproximan muy bien a esta funcion. Es decir están e
 ese epsilon está en realidad en el intervalo [rk-h, rk+h], y dado que h es muy pequeño, epsilon tiene que ser muy similar a rk.
 Por lo tanto logicamente v'''(epsilon) * h**2 / 6 va a ser muy similar a v'''(rk) * h**2 / 6. (para toda k). 
  Además, si en lugar de ver una cota del error general para todo el intervalo [0.37, 0.74]  nos concentraramos en 
-cada intervalo [rk - h, rk + h], como |v'''| es decreciente(en todo el intervalo SALVO una region entre el 0.45 y 0.50,
+cada intervalo [rk - h, rk + h], como |v'''| es decreciente(en todo el intervalo SALVO una región entre el 0.45 y 0.50,
 como se ve en  parcial2c_drvda3ra.pdf)  La cota de V''' en esos intervalos va a ser v'''(rk-h).
 Por lo tanto la cota del error en ese intervalo va a ser v'''(rk-h)*h**2/6. veamos entonces en un grafico el error y v'''(r-h)*h**2/6.
-Este es el grafico parcial2c_erroryf3_2.pdf. Como se puede observar, la funcion acota al error. (Salvo en una region entre el 0.45 y 0.50).
+Este es el grafico parcial2c_erroryf3_2.pdf. Como se puede observar, la funcion acota al error. (Salvo en una región entre el 0.45 y 0.50).
 
 (1d)
  resultados del programa:
