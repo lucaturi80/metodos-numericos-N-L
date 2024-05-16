@@ -60,4 +60,9 @@ y el error relativo seria:        0.02407660
 
 una observacion es que la interpocacion que hicimos usando menos datos fueron mas exactas que en las que usamos mas datos, esto se podria deber a que el polinomio de lagrange, al intentar que la funcion sea exacta en mas puntos las iterpolaciones que hace son peores, capaz convendria hacer un ajuste por cuadrados minimos o algun ajuste, que la interpolacion es mejor mientras mas puntos conoscas, igual los errores fueron del orden de 10**(-2)
 
+(1e)
+  se ve en el grafico parcial2e.pdf que la aproximacion usando el metodo de lagrange da un error enorme en los extremos comparado con el ajuste de gnuplot, que sabemos que es mas confiable para predecir, esto se debe al fenomeno de runge, que sucede cuando estamos interpolando con un polinomio de grado muy grande y en intervalos equiespaciados, como es el caso, ya que el polinomio de lagrange usado es de grado 43, lo que poderiamos hacer para mejorar la aproximacion es usar polinomios de lagrange de grado menor con puntos cercanos a cada r, si hacemos esto, se ve en el grafico de parcial2e_mejorado.pdf, que los puntos interpolados con este nuevo metodo dan iguales que la funcion ajustada con gnuplot, ya que se elimina el fenomeno de runge al usar un polinomio de grado menor (4 en este caso).
+
+
+
 

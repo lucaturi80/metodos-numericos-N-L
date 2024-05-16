@@ -7,14 +7,52 @@ implicit none
 
 !defino variables
 real(nr)                            :: r0,r,Vr04,Vr08,Vr0,Er
-integer(ni)                         :: nu1,nu2,n_ite,e,n,i
+integer(ni)                         :: nu1,nu2,nu3,n_ite,e,n,i
 real(nr),allocatable,dimension(:)   :: x0,y0
 
-
-!voy a usar el polinomio de lagrange de grado 3 usando los 4 puntos mas cercanos al r que queramos calcular
+!voy a usar el polinomio de lagrange completo para interpolar el r en cada punto
 
 open(newunit=nu1,file='data/datos.dat',status='old',action='read')
-open(newunit=nu2,file='data/parcial2e.dat',status='replace',action='write')
+open(newunit=nu3,file='data/parcial2e.dat',status='replace',action='write')
+
+write(nu3,'(2A18)') '# r (nm)','V(r) (erg)'
+
+!guardo todos los datos del archivo de datos en un vector para darle al polinomio de lagrange para que interpole los r
+
+n = 0_ni
+do 
+  read(nu1,*,iostat=e) r   ! leo el numero de datos del archivo
+  if(e/=0) exit
+  n = n + 1_ni
+end do
+
+rewind(nu1)
+
+allocate(x0(n),y0(n))
+
+do i=1,n
+  read(nu1,*) x0(i),y0(i)
+end do
+
+!ahora interpolo en cada punto y lo guardo en el archivo de salida
+
+r = 0.32_nr
+
+do
+  call lagrange(n-1,x0,y0,r,Vr0)  ! llamo a lagrange para cada r desde 0.36 a 0.75 de a 0.005
+  write(nu3,'(2F18.8)') r,Vr0
+  r = r + 0.005_nr
+  if(r > 0.75_nr) exit
+end do
+
+deallocate(x0,y0)  !desasigno memoria para poder usar los vectores en los siguientes pasos
+rewind(nu1)
+!el grafico esta en el archivo parcial2e.gp, se grafica al ejecutar el run_e.sh
+
+
+!ahora voy a usar el polinomio de lagrange de grado 3 usando los 4 puntos mas cercanos al r que queramos calcular
+open(newunit=nu2,file='data/parcial2e_mejorado.dat',status='replace',action='write')
+
 
 write(nu2,'(2A18)') '# r (nm)','V(r) (erg)'
 

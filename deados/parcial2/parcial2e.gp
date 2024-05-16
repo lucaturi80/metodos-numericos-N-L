@@ -18,7 +18,14 @@ set grid
 set xrange [0.3:0.75]
 set yrange [-175:200]
 
-plot 'data/parcial2e.dat' with points t 'funcion interpolada con lagrange',V(x) t 'funcion ajustada con gnuplot'
+plot 'data/parcial2e.dat' with lines t 'funcion interpolada con lagrange','data/parcial2e.dat' with points t 'puntos',V(x) t 'funcion ajustada con gnuplot'
+
+set title 'garfico de las interpolaciones usando lagrange con los 4 puntos mas cercanos'
+
+set output 'parcial2e_mejorado.pdf'
+
+plot 'data/parcial2e_mejorado.dat' with points t 'funcion interpolada con lagrange',V(x) t 'funcion ajustada con gnuplot'
+
 
 
 
