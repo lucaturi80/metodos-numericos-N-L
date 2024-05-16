@@ -27,13 +27,18 @@ entonces una cota del error, sabiendo que fue calculada con la formula de 3 punt
 Podemos tomar el termino del error de redondeo como despreciable y seguimos
 =0.005**2 * 6204265.26 / 6  = 25.85.
   Por lo tanto el error está acotado por 25.85 en los puntos del intervalo. Y como podemos ver en parcial2c_error.pdf esto se cumple.
-Sin embargo tenemos que es una cota que nos queda muy holgada ya que el error decrece rapidamente. Esto ocurre puesto V''' se acerca a 0 
-rapidamente. Por lo tanto si en lugar de ver una cota del error en todo el intervalo [0.37, 0.74]  nos concentraramos en 
-cada intervalo [rk - h, rk + h] veríamos que la cota disminuye a medida que rk llega a 0.75. 
-La cota de V''' es ella misma. Por lo tanto en esos intervalos 
-el error está dado por v'''(rk-h) * h**2 / 6.  Es interesante entonces ver en un mismo grafico el error
-y la derivada 3ra en x-h multiplicada por h**2 / 6. Este es el gráfico parcial2c_erroryf3h26.pdf generado por parcial2c_erroryf3.gp
-Como podemos ver son practicamente iguales. lo que es sorprendente.
+Sin embargo tenemos que esa cota nos queda muy holgada pasando de r= 0.4 . Esto ocurre puesto que  V''' se acerca a 0 
+rapidamente.
+ el error está dado por v'''(epsilon) * h**2 / 6.  Es interesante entonces ver en un mismo grafico el error
+y la derivada 3ra en r multiplicada por h**2 / 6. Este es el gráfico parcial2c_erroryf3_1.pdf generado por parcial2c_erroryf3.gp
+Como podemos ver los puntos aproximan muy bien a esta funcion. Es decir están en un orden de magnitud demasiado similar. Esto ocurre puesto que
+ese epsilon está en realidad en el intervalo [rk-h, rk+h], y dado que h es muy pequeño, epsilon tiene que ser muy similar a rk.
+Por lo tanto logicamente v'''(epsilon) * h**2 / 6 va a ser muy similar a v'''(rk) * h**2 / 6. (para toda k). 
+ Además, si en lugar de ver una cota del error general para todo el intervalo [0.37, 0.74]  nos concentraramos en 
+cada intervalo [rk - h, rk + h], como |v'''| es decreciente(en todo el intervalo SALVO una region entre el 0.45 y 0.50,
+como se ve en  parcial2c_drvda3ra.pdf)  La cota de V''' en esos intervalos va a ser v'''(rk-h).
+Por lo tanto la cota del error en ese intervalo va a ser v'''(rk-h)*h**2/6. veamos entonces en un grafico el error y v'''(r-h)*h**2/6.
+Este es el grafico parcial2c_erroryf3_2.pdf. Como se puede observar, la funcion acota al error. (Salvo en una region entre el 0.45 y 0.50).
 
 (1d)
  resultados del programa:

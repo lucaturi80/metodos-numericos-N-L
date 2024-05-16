@@ -5,5 +5,4 @@ set xra [0.37:0.74]
 
 set terminal pdf
 set output "parcial2c_drvda3ra.pdf"
-plot Vtercera(x)
-pause -1
+plot abs(Vtercera(x))
