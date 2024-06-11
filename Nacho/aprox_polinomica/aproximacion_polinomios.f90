@@ -5,7 +5,7 @@ use funciones
 
 implicit none
 INTEGER(KIND = il) 						::x
-INTEGER(KIND=il), PARAMETER 			::total = 2
+INTEGER(KIND=il), PARAMETER 			::total = 4 
 REAL(KIND=rd), DIMENSION(total,2)	 	::xv
 INTEGER(KIND = il) 						::daz, i
 
@@ -17,10 +17,10 @@ end do
 open(unit = 2, file = "data/funcion.dat")
 
 
-!ejecutando la funcion para algunos n 
-do x = 1,100
+!ejecutando la funcion para algunos x
+do x = 1,120
 	write(2,*) (x/10.0_rd), p(total, xv, x/10.0_rd)
-	!66 FORMAT (2(F2.2))
+	!66 FORMAT (2(2X,E2.2))
 end do
 
 close(1)

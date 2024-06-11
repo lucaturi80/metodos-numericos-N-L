@@ -11,7 +11,7 @@ INTEGER(KIND=il)            		                ::n
 
 p = 0
 do n= 1, total
-p = p + l(n,total, xv, x)* xv(i,2)
+p = p + l(n,total, xv, x)* xv(n,2)
 end do
 
 end function p

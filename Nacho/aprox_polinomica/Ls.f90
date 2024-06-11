@@ -11,7 +11,6 @@ INTEGER(KIND = il), intent(in) 	                    ::total
 REAL(KIND = rd), intent(in) 	                    ::x
 REAL(KIND = rd)			 	                        ::num, denm
 INTEGER(KIND = il) 			 	                    ::i
-INTEGER(KIND = il) 				                    ::daz
 REAL(KIND=rd), DIMENSION(total,2), intent(in)	 	::xv
 
 
@@ -26,7 +25,7 @@ num = num * (x- xv(i,1))
 denm = denm * (xv(n,1) - xv(i,1))
 end do
 
-close(1)
+l= num / denm
 
 end function
  
